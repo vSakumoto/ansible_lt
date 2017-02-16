@@ -16,7 +16,12 @@
 同梱されているバッチスクリプトを実行することにより、wordpress環境を構築することができます。
 
 ```
-git clone
+git clone https://github.com/vSakumoto/ansible_lt.git
 
+bash initial.sh
+
+open localhost:8090
 
 ```
+
+
