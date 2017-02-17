@@ -18,10 +18,17 @@
 ```
 git clone https://github.com/vSakumoto/ansible_lt.git
 
+cd ansible_lt
+
 bash initial.sh
 
-open localhost:8090
 
 ```
+
+## ※注意※wordpressのID/PWはコード上にハードコードされています。
+
+- 実利用する際はansible vaultなどを利用の上、難読化もしくはgitignoreに含めて対応してください
+- リファクタされていないので。。。PR出していただければ直ぐマージします！
+
 
 
