@@ -1,0 +1,21 @@
+---
+- apt: name=apache2 state=latest
+  become: yes
+
+- name: Apache location config file directory
+  file: path=/var/www/wordpress state=directory owner=root group=root mode=0755
+  become: yes
+
+- name: Apache config
+  copy: src=wordpress.conf dest=/etc/apache2/sites-available/wordpress.conf owner=root group=root mode=0755
+  become: yes
+
+- name: Apache a2dissite 000-default
+  command: a2dissite 000-default.conf
+
+- name: Apache a2ensite wordpress
+  command: a2ensite wordpress.conf
+
+- name: apache2_start
+  become: yes
+  action: service name=apache2 state=restarted

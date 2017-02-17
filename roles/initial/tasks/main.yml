@@ -1,0 +1,29 @@
+---
+- name: Install first packages
+  apt: name={{ item }} state=installed update_cache=yes
+  with_items:
+    - vim
+    - curl
+    - wget
+    - build-essential
+    - unzip
+    - zip
+    - python-dev
+    - libmysqlclient-dev
+
+- name: Install PHP packages
+  apt: name={{ item }} state=installed update_cache=yes
+  with_items:
+    - php5
+    - php5-cli
+    - php5-fpm
+    - php-pear
+    - php5-dev
+    - php-apc
+    - php5-mcrypt
+    - php5-gd
+    - php5-curl
+    - php5-xdebug
+    - php5-sqlite
+    - php5-mysql
+    - libapache2-mod-php5

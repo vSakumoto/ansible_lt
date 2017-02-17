@@ -1,0 +1,14 @@
+---
+- name: Ansbile user add
+  user: name=ansible uid=1001
+
+- name: Ansbile sshkey setting
+  authorized_key:
+    user: ansible
+    key: ""
+
+- name: ansible sudoers
+  lineinfile:
+    dest: /etc/sudoers
+    backup: yes
+    line: 'ansible ALL=(ALL) NOPASSWD: ALL'

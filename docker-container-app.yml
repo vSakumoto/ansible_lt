@@ -1,0 +1,14 @@
+---
+- name: Docker Container
+  hosts: containers
+  connection: docker
+  force_handlers: true
+  become: yes
+  roles:
+    - initial
+    - ntp
+    - useradd
+    - apache
+    - mysql
+    - wordpress
+

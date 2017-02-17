@@ -1,0 +1,41 @@
+---
+- name: Install the MySQL packages
+  apt: name={{ item }} state=installed update_cache=yes
+  with_items:
+    - mysql-server
+    - mysql-client
+    - python-mysqldb
+    - libmysqlclient-dev
+
+- name: mysql_start
+  shell: "service mysql restart"
+
+- name: Update MySQL root password for all root accounts
+  mysql_user: name=root host={{ item }} password={{ mysql_root_pass }} state=present
+  with_items:
+    - 127.0.0.1
+    - ::1
+    - localhost
+
+- name: Update MySQL root password
+  shell: "mysqladmin -u root password '{{ mysql_root_pass }}'"
+  ignore_errors: true
+  register: init_flag
+
+- name: mysql_restart
+  become: yes
+  service: name=mysql state=restarted
+
+- name: Copy the root credentials as .my.cnf file
+  template: src=my.cnf.j2 dest=/root/.my.cnf mode=0600
+
+- name: Ensure Anonymous user(s) are not in the database
+  mysql_user: host={{ item }} name='' state=absent
+  with_items:
+    - localhost
+
+- name: Remove the test database
+  mysql_db: name=test state=absent
+
+- name: mysql_start
+  shell: "service mysql restart"
