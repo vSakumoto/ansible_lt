@@ -21,9 +21,10 @@ git clone https://github.com/vSakumoto/ansible_lt.git
 cd ansible_lt
 
 bash initial.sh
-
-
 ```
+
+![ansible_demo](./src/ansible.gif)
+
 
 ## ※注意※wordpressのID/PWはコード上にハードコードされています。
 
